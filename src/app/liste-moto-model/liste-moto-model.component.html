@@ -1,0 +1,24 @@
+
+<div class="container">
+  <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+    <app-update-model [model]="updatedModel" (modelUpdated)="modelUpdated($event)" [ajout]="ajout"></app-update-model>
+  </div>
+  <div class="card shadow mb-4">
+    <div class="card-body">
+
+      <table class="table table-striped">
+        <thead>
+        <tr> <th>Id</th><th>Nom Model</th> </tr>
+        </thead>
+        <tbody *ngFor="let model of models">
+        <tr>
+          <td>{{model.idModel}}</td>
+          <td>{{model.nomModel}}</td>
+          <td><a class="btn btn-success" (click)="updateModel(model)">Editer</a></td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

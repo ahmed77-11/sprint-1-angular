@@ -1,0 +1,15 @@
+<form>
+<div [hidden]="ajout" >
+  <label>ID Model</label>
+  <input type="text" [(ngModel)]="model.idModel" name="idModel" class="form-control w-25">
+</div>
+<div>
+  <label>Nom Catégorie</label>
+  <input type="text" [(ngModel)]="model.nomModel" name="nomModel" class="form-control"
+         placeholder="Entrez un nom de Model...">
+</div>
+<div class="mt-2">
+  <button type="submit" [disabled]="!model.nomModel" class="btn btn-success"
+          (click)="saveModel()" >{{ajout?'Ajouter':'Modifier'}}</button>
+</div>
+</form>

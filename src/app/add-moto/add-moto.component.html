@@ -1,0 +1,66 @@
+<div class="container">
+  <div>
+    <h2>Ajouter un Moto :</h2>
+  </div>
+  <form>
+    <div hidden class="col-sm-2 col-md-2 col-lg-2">
+      <label>ID Moto</label>
+      <input
+        type="text"
+        [(ngModel)]="newMoto.idMoto"
+        name="idMoto"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Marque Moto</label>
+      <input
+        type="text"
+        [(ngModel)]="newMoto.marqueMoto"
+        name="marqueMoto"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Prix Moto</label>
+      <input
+        type="number"
+        [(ngModel)]="newMoto.prixMoto"
+        name="prixMoto"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Date Du fabrication</label>
+      <input
+        type="date"
+        [(ngModel)]="newMoto.dateCreation"
+        name="dateCreation"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Model</label>
+      <select
+        class="form-control form-control-lg"
+        id="idModel"
+        name="idModel"
+        [(ngModel)]="newIdModel"
+      >
+        <option *ngFor="let mod of motoModels" [value]="mod.idModel">
+          {{ mod.nomModel }}
+        </option>
+      </select>
+    </div>
+    <div class="mt-2">
+      <button type="submit" (click)="addMoto()" class="btn btn-success">
+        Ajouter
+      </button>
+      <div>
+        <h3>
+          {{ message }}
+        </h3>
+      </div>
+    </div>
+  </form>
+</div>
