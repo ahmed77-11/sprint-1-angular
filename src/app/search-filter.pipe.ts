@@ -8,9 +8,9 @@ export class SearchFilterPipe implements PipeTransform {
     console.log('Pipe transform called');
 
     // Check if list or filterText is falsy (empty, null, etc.)
-    if (!list || !filterText) {
-      return []; // If no search term, return full list
-    }
+    // if (!list || !filterText) {
+    //   return []; // If no search term, return full list
+    // }
 
     return list.filter((item) =>
       item.marqueMoto

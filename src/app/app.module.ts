@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MotosComponent } from './motos/motos.component';
 import { AddMotoComponent } from './add-moto/add-moto.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { UpdateMotoComponent } from './update-moto/update-moto.component';
 import { LoginComponent } from './login/login.component';
@@ -16,6 +16,11 @@ import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.
 import { SearchFilterPipe } from './search-filter.pipe';
 import { ListeMotoModelComponent } from './liste-moto-model/liste-moto-model.component';
 import { UpdateModelComponent } from './update-model/update-model.component';
+import {TokenInterceptor} from "./services/token.interceptor";
+import { RegisterComponent } from './register/register.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -30,9 +35,12 @@ import { UpdateModelComponent } from './update-model/update-model.component';
     SearchFilterPipe,
     ListeMotoModelComponent,
     UpdateModelComponent,
+    RegisterComponent,
+    VerifEmailComponent,
+
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule,ReactiveFormsModule,BrowserAnimationsModule,ToastrModule.forRoot()],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

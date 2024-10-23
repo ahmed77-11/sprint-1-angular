@@ -3,9 +3,14 @@ import { Moto } from '../model/moto.model';
 import { MotoModel } from '../model/motomodel.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+import {AuthService} from "./auth.service";
+
+const {headers:httpHeaders} = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
 };
+
 
 @Injectable({
   providedIn: 'root',
@@ -18,29 +23,36 @@ export class MotoService {
   motoModel!: MotoModel[];
   motoRecherche?: Moto[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private authService:AuthService) {}
 
   listeMotos(): Observable<Moto[]> {
-    return this.http.get<Moto[]>(this.apiURL);
+
+    console.log(httpHeaders)
+    return this.http.get<Moto[]>(this.apiURL+"/all",{headers:httpHeaders});
   }
   listeModel(): Observable<MotoModel[]> {
-    return this.http.get<MotoModel[]>(this.apiURL + '/mod');
+
+    return this.http.get<MotoModel[]>(this.apiURL + '/mod',{headers:httpHeaders});
   }
   // listeModel(): Observable<MotomodelWrapped> {
   //   return this.http.get<MotomodelWrapped>(this.apiURLModel);
   // }
   ajouterMoto(motor: Moto): Observable<Moto> {
-    return this.http.post<Moto>(this.apiURL, motor, httpOptions);
+
+    return this.http.post<Moto>(this.apiURL+"/addmoto", motor, {headers:httpHeaders},);
   }
   supprimerMoto(id: number) {
-    const url = `${this.apiURL}/${id}`;
-    return this.http.delete(url, httpOptions);
+
+    const url = `${this.apiURL+"/delmoto"}/${id}`;
+    return this.http.delete(url, {headers:httpHeaders});
   }
   consulterMoto(id: number): Observable<Moto> {
-    const url = `${this.apiURL}/${id}`;
-    return this.http.get<Moto>(url);
+
+    const url = `${this.apiURL+"/getbyid"}/${id}`;
+    return this.http.get<Moto>(url,{headers:httpHeaders});
   }
   consulterModel(id: number): MotoModel {
+
     return this.motoModel.find((mod) => mod.idModel == id)!;
   }
   trierMotos() {
@@ -56,17 +68,21 @@ export class MotoService {
   }
 
   updateMoto(m: Moto): Observable<Moto> {
-    return this.http.put<Moto>(this.apiURL, m, httpOptions);
+
+    return this.http.put<Moto>(this.apiURL+"/updatemoto", m, {headers:httpHeaders});
   }
   rechercheParModel(idModel: number): Observable<Moto[]> {
+
     const url = `${this.apiURL}/motosmod/${idModel}`;
-    return this.http.get<Moto[]>(url);
+    return this.http.get<Moto[]>(url,{headers:httpHeaders});
   }
   rechercherParNom(marque: string): Observable<Moto[]> {
+
     const url = `${this.apiURL}/motosByMarque/${marque}`;
-    return this.http.get<Moto[]>(url);
+    return this.http.get<Moto[]>(url,{headers:httpHeaders});
   }
   ajouterModel(m: MotoModel): Observable<MotoModel> {
-    return this.http.post<MotoModel>(this.apiURLModel, m, httpOptions);
+
+    return this.http.post<MotoModel>(this.apiURLModel, m, {headers:httpHeaders});
   }
 }

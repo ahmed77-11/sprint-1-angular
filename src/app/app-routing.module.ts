@@ -9,6 +9,8 @@ import { MotoGuard } from './moto.guard';
 import { RechercheParModelComponent } from './recherche-par-model/recherche-par-model.component';
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 import {ListeMotoModelComponent} from "./liste-moto-model/liste-moto-model.component";
+import {RegisterComponent} from "./register/register.component";
+import {VerifEmailComponent} from "./verif-email/verif-email.component";
 
 const routes: Routes = [
   {
@@ -29,7 +31,9 @@ const routes: Routes = [
   { path: 'rechercheParModel', component: RechercheParModelComponent },
   { path: 'rechercheParMarque', component: RechercheParNomComponent },
   { path: '', redirectTo: 'motos', pathMatch: 'full' },
-  {path:"listeModels",component:ListeMotoModelComponent}
+  {path:"listeModels",component:ListeMotoModelComponent,canActivate: [MotoGuard]},
+  {path:"register",component:RegisterComponent},
+  {path:"verifEmail",component:VerifEmailComponent}
 ];
 
 @NgModule({

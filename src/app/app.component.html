@@ -37,7 +37,7 @@
             <a class="dropdown-item" routerLink="/rechercheParMarque"
               >Recherche Par Marque</a
             >
-            <a class="dropdown-item" routerLink="/listeModels" >Gestion des Moto Model</a>
+            <a class="dropdown-item" *ngIf="authService.isAdmin()" routerLink="/listeModels" >Gestion des Moto Model</a>
           </div>
         </li>
       </ul>
@@ -67,6 +67,12 @@
               (click)="onLogout()"
               >logout</a
             >
+            <a
+              *ngIf="!authService.isloggedIn"
+               class="dropdown-item"
+              routerLink="/register">
+              S'inscrire
+            </a>
             <a class="dropdown-item" href="#">Profile</a>
           </div>
         </li>
