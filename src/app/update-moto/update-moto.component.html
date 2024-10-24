@@ -42,7 +42,7 @@
       />
     </div>
     <div class="col-sm-4 col-md-4 col-lg-4">
-      <label for="">Model du Moto</label>
+      <label for="idModel">Model du Moto</label>
       <select
         class="form-control form-control-lg"
         id="idModel"
@@ -54,10 +54,40 @@
         </option>
       </select>
     </div>
+
+    <div class="col-sm-16 col-md-16 col-lg-16">
+      <label class="mb-2">Image :</label>
+      <input type="file" (change)="onImageUpload($event)" class="form-control">
+    </div>
+    <div class="col-sm-16 col-md-16 col-lg-16">
+    <img [src]="myImage" class="card-img-top img-fluid rounded-start"
+         style="width: 500px; height: 300px" />
+    </div>
+
     <div class="mt-2">
+      <button type="submit" (click)="onAddImageMoto()" class="btn btn-success">Ajouter Image</button>
+    </div>
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+          <tr> <th>Images</th> </tr>
+          </thead>
+          <tbody *ngFor="let img of currentMoto.images">
+          <tr>
+            <td><img class="card-img-top img-responsive"
+                     src = "{{'data:' + img.type + ';base64,' + img.image}}"
+                     style = "height :50px;width:100px"></td>
+            <td style="width:20%" ><a class="btn btn-danger"  (click)="supprimerImage(img)">Supprimer</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-2">
       <button type="submit" (click)="updateMoto()" class="btn btn-success">
         Modifer
       </button>
+    </div>
     </div>
   </form>
 </div>

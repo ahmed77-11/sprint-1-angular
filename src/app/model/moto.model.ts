@@ -1,4 +1,5 @@
 import { MotoModel } from './motomodel.model';
+import {Image} from "./image.model";
 
 export class Moto {
   idMoto?: number;
@@ -6,4 +7,11 @@ export class Moto {
   prixMoto?: number;
   dateCreation?: Date;
   model?: MotoModel;
+
+  image?: Image;
+  imageStr!:string;
+
+  images!:Image[];
+
+
 }

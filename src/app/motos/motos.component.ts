@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Moto } from '../model/moto.model';
 import { MotoService } from '../services/moto.service';
 import { AuthService } from '../services/auth.service';
+import {Image} from "../model/image.model";
 
 @Component({
   selector: 'app-motos',
@@ -23,6 +24,9 @@ export class MotosComponent implements OnInit {
     this.motoService.listeMotos().subscribe((moto) => {
       console.log(moto);
       this.motos = moto;
+      this.motos.forEach((mot)=>{
+        mot.imageStr='data:'+mot.images[0].type+';base64,'+mot.images[0].image;
+      })
     });
   }
   supprimerMoto(m: Moto) {

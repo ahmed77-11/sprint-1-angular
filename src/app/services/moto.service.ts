@@ -4,11 +4,15 @@ import { MotoModel } from '../model/motomodel.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {AuthService} from "./auth.service";
+import {Image} from "../model/image.model";
 
 const {headers:httpHeaders} = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
   })
+};
+const httpOptions = {
+  headers: new HttpHeaders( {'Content-Type': 'application/json'} )
 };
 
 
@@ -24,6 +28,7 @@ export class MotoService {
   motoRecherche?: Moto[];
 
   constructor(private http: HttpClient,private authService:AuthService) {}
+
 
   listeMotos(): Observable<Moto[]> {
 
@@ -84,5 +89,30 @@ export class MotoService {
   ajouterModel(m: MotoModel): Observable<MotoModel> {
 
     return this.http.post<MotoModel>(this.apiURLModel, m, {headers:httpHeaders});
+  }
+  uploadImage(file: File, filename: string): Observable<Image>{
+    const imageFormData = new FormData();
+    imageFormData.append('image', file, filename);
+    const url = `${this.apiURL + '/image/upload'}`;
+    console.log(imageFormData)
+    return this.http.post<Image>(url, imageFormData);
+  }
+  loadImage(idImage: number): Observable<any> {
+    const url=`${this.apiURL}/image/get/info/${idImage}`;
+    return this.http.get(url);
+  }
+
+  uploadImageMoto(file: File, filename: string, idMoto: number): Observable<Image> {
+    const imageFormData = new FormData();
+    imageFormData.append('image', file, filename);
+    const url = `${this.apiURL + '/image/uploadImageMoto'}/${idMoto}`;
+    return this.http.post<Image>(url, imageFormData);
+
+  }
+
+  supprimerImage(id: number) {
+    const url=`${this.apiURL}/image/delete/${id}`;
+    return this.http.delete(url,httpOptions);
+
   }
 }

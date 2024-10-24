@@ -8,6 +8,7 @@
           <th>Prix</th>
           <th>Date Du fabrication</th>
           <th>Model</th>
+          <th>Image</th>
         </tr>
         <tbody *ngFor="let moto of motos">
           <tr>
@@ -16,6 +17,10 @@
             <td>{{ moto.prixMoto }}</td>
             <td>{{ moto.dateCreation | date : "dd/MM/yyyy" }}</td>
             <td>{{ moto.model?.nomModel }}</td>
+            <td><img class="card-img-top img-responsive"
+                     src = "{{moto.imageStr}}"
+                     style = "height :50px;width:100px">
+            </td>
             <td>
               <a
                 *ngIf="authService.isAdmin()"
