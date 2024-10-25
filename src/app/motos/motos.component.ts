@@ -11,6 +11,9 @@ import {Image} from "../model/image.model";
 })
 export class MotosComponent implements OnInit {
   motos?: Moto[];
+
+  apiurl:string='http://localhost:8081/motos/api';
+
   constructor(
     private motoService: MotoService,
     public authService: AuthService
@@ -20,14 +23,20 @@ export class MotosComponent implements OnInit {
   ngOnInit(): void {
     this.chargerMotos();
   }
+  // chargerMotos() {
+  //   this.motoService.listeMotos().subscribe((moto) => {
+  //     console.log(moto);
+  //     this.motos = moto;
+  //     this.motos.forEach((mot)=>{
+  //       mot.imageStr='data:'+mot.images[0].type+';base64,'+mot.images[0].image;
+  //     })
+  //   });
+  // }
   chargerMotos() {
-    this.motoService.listeMotos().subscribe((moto) => {
-      console.log(moto);
-      this.motos = moto;
-      this.motos.forEach((mot)=>{
-        mot.imageStr='data:'+mot.images[0].type+';base64,'+mot.images[0].image;
-      })
-    });
+  this.motoService.listeMotos().subscribe((moto) => {
+    console.log(moto);
+    this.motos = moto;
+  });
   }
   supprimerMoto(m: Moto) {
     let conf = confirm('Etes-vous sûr ?');

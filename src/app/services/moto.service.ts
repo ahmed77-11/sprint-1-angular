@@ -113,6 +113,12 @@ export class MotoService {
   supprimerImage(id: number) {
     const url=`${this.apiURL}/image/delete/${id}`;
     return this.http.delete(url,httpOptions);
+  }
+  uploadImageFS(file:File,filename:string,idMoto:number):Observable<any>{
+    const imageFormData = new FormData();
+    imageFormData.append('image', file, filename);
+    const url = `${this.apiURL + '/image/uploadFS'}/${idMoto}`;
+    return this.http.post<Image>(url, imageFormData);
 
   }
 }

@@ -18,8 +18,9 @@
             <td>{{ moto.dateCreation | date : "dd/MM/yyyy" }}</td>
             <td>{{ moto.model?.nomModel }}</td>
             <td><img class="card-img-top img-responsive"
-                     src = "{{moto.imageStr}}"
+                     src="{{apiurl+'/image/loadfromFS/'+moto.idMoto}}"
                      style = "height :50px;width:100px">
+<!--              src = "{{moto.imageStr}}"-->
             </td>
             <td>
               <a

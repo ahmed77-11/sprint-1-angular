@@ -35,19 +35,26 @@ export class AddMotoComponent implements OnInit {
       this.imagePath=reader.result;
     }
   }
-  addMoto(){
-    this.motoService
-      .uploadImage(this.uploadedImage, this.uploadedImage.name)
-      .subscribe((img:Image) => {
-        this.newMoto.image=img;
-        this.newMoto.model = this.motoModels.find(mod => mod.idModel
-          == this.newIdModel)!;
-        this.motoService
-          .ajouterMoto(this.newMoto)
-          .subscribe(() => {
-            this.router.navigate(['motos']);
-          });
-      });
-  }
+  // addMoto(){
+  //   this.motoService
+  //     .uploadImage(this.uploadedImage, this.uploadedImage.name)
+  //     .subscribe((img:Image) => {
+  //       this.newMoto.image=img;
+  //       this.newMoto.model = this.motoModels.find(mod => mod.idModel
+  //         == this.newIdModel)!;
+  //       this.motoService
+  //         .ajouterMoto(this.newMoto)
+  //         .subscribe(() => {
+  //           this.router.navigate(['motos']);
+  //         });
+  //     });
+  // }
 
+  addMoto(){
+    this.newMoto.model=this.motoModels.find(mod=>mod.idModel==this.newIdModel)!;
+    this.motoService.ajouterMoto(this.newMoto).subscribe((moto)=>{
+      this.motoService.uploadImageFS(this.uploadedImage,this.uploadedImage.name,moto.idMoto!).subscribe((response:any)=>{});
+      this.router.navigate(['motos']);
+    })
+  }
 }
